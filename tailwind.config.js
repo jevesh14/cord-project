@@ -8,11 +8,25 @@ export default {
         'serif': ['IBM Plex Serif', 'Georgia', 'serif'],
       },
       colors: {
-        navy: '#00053F',
-        ivory: '#F9F9F6',
-        coral: '#FF6B6B',
-        teal: '#A7F3D0',
-        lavender: '#C7D2FE',
+        background: {
+          main: '#FFF6F9',    // soft blush pink
+          alt: '#FCE4EC',     // light rose pink
+          card: '#FDF2F6',    // transparent overlay background
+        },
+        plum: {
+          light: '#8E3C68',   // header/footer plum-purple
+          DEFAULT: '#6A1B4D', // bold plum for headings
+        },
+        pink: {
+          vivid: '#D81B60',   // subheadings/highlights
+          primary: '#EC407A', // primary button background
+          hover: '#C2185B',   // primary button hover
+          soft: '#F8BBD0',    // secondary button background
+        },
+        text: {
+          body: '#4A4A4A',    // neutral dark grey
+          light: '#FFFFFF',   // white text
+        }
       },
       animation: {
         'bounce-slow': 'bounce 2s infinite',
@@ -24,16 +38,22 @@ export default {
     },
   },
   safelist: [
-    'bg-coral/10',
-    'bg-teal/10',
-    'bg-lavender/10',
-    'text-coral',
-    'text-teal',
-    'text-lavender',
-    'bg-coral',
-    'bg-teal',
-    'bg-navy',
-    'bg-lavender'
+    'bg-background-main',
+    'bg-background-alt',
+    'bg-background-card',
+    'bg-plum',
+    'bg-plum-light',
+    'bg-pink-vivid',
+    'bg-pink-primary',
+    'bg-pink-hover',
+    'bg-pink-soft',
+    'text-plum',
+    'text-pink-vivid',
+    'text-text-body',
+    'text-text-light',
+    'hover:bg-pink-hover',
+    'hover:text-pink-primary',
+    'hover:underline'
   ],
   plugins: [],
 };

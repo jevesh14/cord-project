@@ -131,7 +131,7 @@ export const Stories = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group ${
+      className={`bg-background-card rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group ${
         featured ? 'lg:col-span-2' : ''
       }`}
       onClick={() => setSelectedStory(story)}
@@ -145,7 +145,7 @@ export const Stories = () => {
           }`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        <div className="absolute bottom-4 left-4 text-white">
+        <div className="absolute bottom-4 left-4 text-text-light">
           <h3 className={`font-semibold mb-1 ${featured ? 'text-xl' : 'text-lg'}`}>
             {story.name}
           </h3>
@@ -153,14 +153,14 @@ export const Stories = () => {
         </div>
         {story.featured && (
           <div className="absolute top-4 right-4">
-            <Star className="h-6 w-6 text-yellow-400" fill="currentColor" />
+            <Star className="h-6 w-6 text-pink-primary" fill="currentColor" />
           </div>
         )}
       </div>
       <div className="p-6">
         <div className="flex items-start space-x-3 mb-4">
-          <Quote className="h-5 w-5 text-coral flex-shrink-0 mt-1" />
-          <p className={`text-navy/80 italic leading-relaxed ${
+          <Quote className="h-5 w-5 text-pink-primary flex-shrink-0 mt-1" />
+          <p className={`text-text-body italic leading-relaxed ${
             featured ? 'text-lg' : 'text-base'
           }`}>
             "{story.shortQuote}"
@@ -168,11 +168,11 @@ export const Stories = () => {
         </div>
         <div className="flex items-center justify-between">
           <div className="text-sm">
-            <span className="font-medium text-teal">{story.condition}</span>
-            <span className="text-navy/60 mx-2">•</span>
-            <span className="text-navy/70">{story.outcome}</span>
+            <span className="font-medium text-pink-primary">{story.condition}</span>
+            <span className="text-text-body/60 mx-2">•</span>
+            <span className="text-text-body">{story.outcome}</span>
           </div>
-          <span className="text-xs text-navy/50">
+          <span className="text-xs text-text-body/50">
             {new Date(story.date).toLocaleDateString('en-IN')}
           </span>
         </div>
@@ -193,7 +193,7 @@ export const Stories = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-background-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative">
@@ -202,42 +202,40 @@ export const Stories = () => {
               alt={story.name}
               className="w-full h-64 object-cover"
             />
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors duration-200"
-            >
-              <X className="h-5 w-5 text-navy" />
-            </button>
-            <div className="absolute bottom-4 left-4 text-white">
-              <h2 className="text-2xl font-bold mb-2">{story.name}</h2>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-4 left-4 text-text-light">
+              <h2 className="text-2xl font-semibold mb-1">{story.name}</h2>
               <p className="text-lg opacity-90">{story.role} • {story.location}</p>
             </div>
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 bg-background-card/90 text-plum p-2 rounded-full hover:bg-pink-primary hover:text-text-light transition-colors duration-200"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
-          
-          <div className="p-8">
-            <div className="mb-6">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="bg-coral/10 px-3 py-1 rounded-full">
-                  <span className="text-coral font-medium text-sm">{story.condition}</span>
-                </div>
-                <div className="bg-teal/10 px-3 py-1 rounded-full">
-                  <span className="text-teal font-medium text-sm">{story.outcome}</span>
-                </div>
-              </div>
-              <p className="text-navy/60 text-sm">
-                {new Date(story.date).toLocaleDateString('en-IN', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </p>
-            </div>
-
-            <div className="prose prose-lg max-w-none">
-              <Quote className="h-8 w-8 text-coral mb-4" />
-              <p className="text-navy/80 leading-relaxed text-lg">
+          <div className="p-6">
+            <div className="flex items-start space-x-3 mb-6">
+              <Quote className="h-6 w-6 text-pink-primary flex-shrink-0 mt-1" />
+              <p className="text-lg text-text-body leading-relaxed">
                 "{story.fullStory}"
               </p>
+            </div>
+            <div className="flex items-center justify-between border-t border-pink-soft/10 pt-4">
+              <div>
+                <p className="text-sm font-medium text-plum mb-1">Condition</p>
+                <p className="text-pink-primary">{story.condition}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-plum mb-1">Outcome</p>
+                <p className="text-pink-primary">{story.outcome}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-plum mb-1">Date</p>
+                <p className="text-text-body">
+                  {new Date(story.date).toLocaleDateString('en-IN')}
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -246,9 +244,9 @@ export const Stories = () => {
   );
 
   return (
-    <div className="min-h-screen bg-ivory pt-20">
+    <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-navy to-navy/90 text-white">
+      <section className="py-16 bg-gradient-to-br from-plum to-plum/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -256,75 +254,47 @@ export const Stories = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <Heart className="h-16 w-16 mx-auto mb-6 text-coral" fill="currentColor" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Stories of Hope and Healing
+            <Heart className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
+            <h1 className="text-4xl md:text-5xl font-bold text-text-light mb-6">
+              Success Stories
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Real families sharing their experiences with cord blood banking and treatment. 
-              These stories showcase the life-changing impact of preserved stem cells.
+            <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
+              Real stories from families, patients, and doctors who have experienced the life-changing impact of cord blood banking.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Featured Stories Carousel */}
-      <section className="py-16 bg-white">
+      <section className="py-12 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <Star className="h-12 w-12 mx-auto mb-4 text-coral" fill="currentColor" />
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              Featured Stories
-            </h2>
-            <p className="text-xl text-navy/70">
-              Inspiring journeys that highlight the power of cord blood preservation
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-plum">Featured Stories</h2>
+            <div className="flex items-center space-x-4">
               <button
                 onClick={prevStory}
-                className="p-3 bg-coral/10 text-coral rounded-full hover:bg-coral/20 transition-colors duration-200 mr-4"
+                className="p-2 rounded-xl bg-background-card text-plum hover:bg-pink-primary hover:text-text-light transition-colors duration-200"
               >
                 <ChevronLeft className="h-6 w-6" />
               </button>
-              
-              <div className="flex space-x-2">
-                {featuredStories.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                      index === currentIndex ? 'bg-coral' : 'bg-coral/30'
-                    }`}
-                  />
-                ))}
-              </div>
-
               <button
                 onClick={nextStory}
-                className="p-3 bg-coral/10 text-coral rounded-full hover:bg-coral/20 transition-colors duration-200 ml-4"
+                className="p-2 rounded-xl bg-background-card text-plum hover:bg-pink-primary hover:text-text-light transition-colors duration-200"
               >
                 <ChevronRight className="h-6 w-6" />
               </button>
             </div>
-
+          </div>
+          <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 300 }}
+                initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -300 }}
+                exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
               >
-                <StoryCard story={featuredStories[currentIndex]} featured={true} />
+                <StoryCard story={featuredStories[currentIndex]} featured />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -332,93 +302,65 @@ export const Stories = () => {
       </section>
 
       {/* All Stories */}
-      <section className="py-16 bg-ivory">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <Users className="h-12 w-12 mx-auto mb-4 text-coral" />
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              All Stories
-            </h2>
-          </motion.div>
-
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {[
-              { key: 'all', label: 'All Stories' },
-              { key: 'parents', label: 'Parents' },
-              { key: 'patients', label: 'Patients' },
-              { key: 'doctors', label: 'Medical Professionals' }
-            ].map((filterOption) => (
-              <button
-                key={filterOption.key}
-                onClick={() => setFilter(filterOption.key as typeof filter)}
-                className={`px-6 py-3 rounded-2xl font-medium transition-all duration-300 ${
-                  filter === filterOption.key
-                    ? 'bg-coral text-white shadow-lg'
-                    : 'bg-white text-navy hover:bg-coral/10 border border-gray-200'
-                }`}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+            <h2 className="text-2xl font-bold text-plum">All Stories</h2>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Users className="h-5 w-5 text-text-body" />
+                <span className="text-sm font-medium text-plum">Filter by:</span>
+              </div>
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value as typeof filter)}
+                className="px-4 py-2 bg-background-card border border-pink-soft/20 rounded-xl text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
               >
-                {filterOption.label}
-              </button>
-            ))}
+                <option value="all">All Stories</option>
+                <option value="parents">Parents</option>
+                <option value="patients">Patients</option>
+                <option value="doctors">Medical Professionals</option>
+              </select>
+            </div>
           </div>
 
-          {/* Stories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredStories.map((story) => (
+            {filteredStories.map(story => (
               <StoryCard key={story.id} story={story} />
             ))}
           </div>
 
           {filteredStories.length === 0 && (
             <div className="text-center py-12">
-              <Users className="h-16 w-16 mx-auto mb-4 text-navy/30" />
-              <h3 className="text-xl font-semibold text-navy mb-2">No stories found</h3>
-              <p className="text-navy/60">Try selecting a different filter.</p>
+              <Heart className="h-16 w-16 mx-auto mb-4 text-pink-soft" />
+              <h3 className="text-xl font-semibold text-plum mb-2">
+                No stories found
+              </h3>
+              <p className="text-text-body">
+                Try adjusting your filter to see more stories.
+              </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-coral to-teal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Share Your Story
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-              Have you been impacted by cord blood banking? Share your experience 
-              to inspire and educate other families about this life-saving option.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => {
-                  // TODO: Connect to story submission form
-                }}
-                className="px-8 py-4 bg-white text-coral font-semibold rounded-2xl hover:bg-gray-50 hover:scale-105 transition-all duration-300 shadow-lg"
-              >
+      {/* Share Your Story CTA */}
+      <section className="py-16 bg-background-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-plum to-plum/90 rounded-2xl p-8 md:p-12">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-text-light mb-4">
                 Share Your Story
+              </h2>
+              <p className="text-text-light/90 mb-8">
+                Has cord blood banking made a difference in your life? Share your experience and inspire others.
+              </p>
+              <button className="inline-flex items-center space-x-2 px-6 py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200">
+                <Heart className="h-5 w-5" />
+                <span>Tell Your Story</span>
               </button>
-              <a
-                href="/learn"
-                className="px-8 py-4 bg-white/10 text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
-              >
-                Learn More
-              </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

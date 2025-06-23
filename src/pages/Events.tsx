@@ -132,19 +132,19 @@ export const Events = () => {
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
-      case 'workshop': return 'bg-coral/10 text-coral';
-      case 'seminar': return 'bg-teal/10 text-teal';
-      case 'webinar': return 'bg-lavender/20 text-navy';
-      case 'conference': return 'bg-navy/10 text-navy';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'workshop': return 'bg-pink-primary/10 text-pink-primary';
+      case 'seminar': return 'bg-pink-soft/10 text-pink-soft';
+      case 'webinar': return 'bg-plum/10 text-plum';
+      case 'conference': return 'bg-pink-hover/10 text-pink-hover';
+      default: return 'bg-background-alt text-text-body';
     }
   };
 
   const getAvailabilityStatus = (registered: number, capacity: number) => {
     const percentage = (registered / capacity) * 100;
-    if (percentage >= 100) return { text: 'Full', color: 'text-red-600' };
-    if (percentage >= 80) return { text: 'Almost Full', color: 'text-orange-600' };
-    return { text: 'Available', color: 'text-green-600' };
+    if (percentage >= 100) return { text: 'Full', color: 'text-pink-primary' };
+    if (percentage >= 80) return { text: 'Almost Full', color: 'text-pink-hover' };
+    return { text: 'Available', color: 'text-pink-soft' };
   };
 
   const EventCard = ({ event }: { event: Event }) => {
@@ -157,7 +157,7 @@ export const Events = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+        className="bg-background-card rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
       >
         <div className="relative">
           <img
@@ -172,7 +172,7 @@ export const Events = () => {
           </div>
           {event.status === 'upcoming' && (
             <div className="absolute top-4 right-4">
-              <span className={`px-3 py-1 rounded-full text-xs font-medium bg-white/90 ${availability.color}`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-medium bg-background-card/90 ${availability.color}`}>
                 {availability.text}
               </span>
             </div>
@@ -180,9 +180,9 @@ export const Events = () => {
         </div>
         
         <div className="p-6">
-          <h3 className="text-xl font-semibold text-navy mb-3">{event.title}</h3>
+          <h3 className="text-xl font-semibold text-plum mb-3">{event.title}</h3>
           
-          <div className="space-y-2 mb-4 text-sm text-navy/70">
+          <div className="space-y-2 mb-4 text-sm text-text-body">
             <div className="flex items-center space-x-2">
               <Calendar className="h-4 w-4" />
               <span>{new Date(event.date).toLocaleDateString('en-IN', { 
@@ -200,55 +200,53 @@ export const Events = () => {
               <MapPin className="h-4 w-4" />
               <span>{event.location}</span>
             </div>
+            <div className="flex items-center space-x-2">
+              <Users className="h-4 w-4" />
+              <span>{event.registered} / {event.capacity} registered</span>
+            </div>
           </div>
 
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <p className="text-navy/80 mb-4 leading-relaxed">{event.description}</p>
-                <div className="mb-4">
-                  <p className="text-sm text-navy/60 mb-2">Organized by: <span className="font-medium">{event.organizer}</span></p>
-                  <p className="text-sm text-navy/60">Address: {event.address}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {event.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-lavender/20 text-navy text-xs rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+          <div className="mb-4">
+            <p className={`text-text-body ${!isExpanded && 'line-clamp-2'}`}>
+              {event.description}
+            </p>
             <button
-              type="button"
               onClick={() => setExpandedEvent(isExpanded ? null : event.id)}
-              className="text-coral hover:text-coral/80 font-medium text-sm flex items-center space-x-1"
+              className="mt-2 text-pink-primary hover:text-pink-hover flex items-center space-x-1 text-sm font-medium transition-colors duration-200"
             >
-              <span>{isExpanded ? 'Show Less' : 'Learn More'}</span>
-              <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
+              <span>{isExpanded ? 'Show less' : 'Read more'}</span>
+              <ChevronRight className={`h-4 w-4 transform transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
             </button>
           </div>
+
+          <div className="flex flex-wrap gap-2 mb-4">
+            {event.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-background-alt rounded-lg text-text-body text-xs"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {event.status === 'upcoming' && (
+            <button
+              className="w-full py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200 flex items-center justify-center space-x-2"
+            >
+              <Plus className="h-5 w-5" />
+              <span>Register Now</span>
+            </button>
+          )}
         </div>
       </motion.div>
     );
   };
 
   return (
-    <div className="min-h-screen bg-ivory pt-20">
+    <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-navy to-navy/90 text-white">
+      <section className="py-16 bg-gradient-to-br from-plum to-plum/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -256,56 +254,55 @@ export const Events = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <Calendar className="h-16 w-16 mx-auto mb-6 text-coral" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Events & Workshops
+            <Calendar className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
+            <h1 className="text-4xl md:text-5xl font-bold text-text-light mb-6">
+              Upcoming Events
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Join our community events, educational workshops, and expert seminars 
-              to learn more about cord blood banking and connect with other families.
+            <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
+              Join our educational events and workshops to learn more about cord blood banking and its benefits.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Tabs and Filters */}
-      <section className="py-8 bg-white border-b border-gray-100">
+      {/* Filters Section */}
+      <section className="py-8 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-            {/* Tabs */}
-            <div className="flex space-x-1 bg-gray-100 rounded-2xl p-1">
-              <button
-                onClick={() => setActiveTab('upcoming')}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeTab === 'upcoming'
-                    ? 'bg-white text-coral shadow-sm'
-                    : 'text-navy/60 hover:text-navy'
-                }`}
-              >
-                Upcoming Events
-              </button>
-              <button
-                onClick={() => setActiveTab('past')}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeTab === 'past'
-                    ? 'bg-white text-coral shadow-sm'
-                    : 'text-navy/60 hover:text-navy'
-                }`}
-              >
-                Past Events
-              </button>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center bg-background-card rounded-xl p-1">
+                <button
+                  onClick={() => setActiveTab('upcoming')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                    activeTab === 'upcoming'
+                      ? 'bg-pink-primary text-text-light'
+                      : 'text-text-body hover:text-plum'
+                  }`}
+                >
+                  Upcoming Events
+                </button>
+                <button
+                  onClick={() => setActiveTab('past')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                    activeTab === 'past'
+                      ? 'bg-pink-primary text-text-light'
+                      : 'text-text-body hover:text-plum'
+                  }`}
+                >
+                  Past Events
+                </button>
+              </div>
             </div>
 
-            {/* Filters */}
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Filter className="h-5 w-5 text-navy/60" />
-                <span className="text-sm font-medium text-navy">Filter by type:</span>
+                <Filter className="h-5 w-5 text-text-body" />
+                <span className="text-sm font-medium text-plum">Filter by:</span>
               </div>
               <select
                 value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value as typeof selectedType)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral text-sm"
+                onChange={(e) => setSelectedType(e.target.value as any)}
+                className="px-4 py-2 bg-background-card border border-pink-soft/20 rounded-xl text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
               >
                 <option value="all">All Types</option>
                 <option value="workshop">Workshops</option>
@@ -315,34 +312,51 @@ export const Events = () => {
               </select>
             </div>
           </div>
-
-          <div className="mt-4 text-sm text-navy/60">
-            Showing {filteredEvents.length} {activeTab} events
-          </div>
         </div>
       </section>
 
       {/* Events Grid */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredEvents.length === 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredEvents.map(event => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+
+          {filteredEvents.length === 0 && (
             <div className="text-center py-12">
-              <Calendar className="h-16 w-16 mx-auto mb-4 text-navy/30" />
-              <h3 className="text-xl font-semibold text-navy mb-2">No events found</h3>
-              <p className="text-navy/60">
+              <Calendar className="h-16 w-16 mx-auto mb-4 text-pink-soft" />
+              <h3 className="text-xl font-semibold text-plum mb-2">
+                No {activeTab} events found
+              </h3>
+              <p className="text-text-body">
                 {activeTab === 'upcoming' 
-                  ? 'Check back soon for upcoming events and workshops.'
-                  : 'No past events match your selected filters.'
-                }
+                  ? 'Check back later for new events!'
+                  : 'Stay tuned for our next event series.'}
               </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
           )}
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 bg-background-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-plum to-plum/90 rounded-2xl p-8 md:p-12">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-text-light mb-4">
+                Want to Host an Event?
+              </h2>
+              <p className="text-text-light/90 mb-8">
+                Are you a medical professional or organization interested in hosting an educational event about cord blood banking?
+              </p>
+              <button className="inline-flex items-center space-x-2 px-6 py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200">
+                <span>Get in Touch</span>
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

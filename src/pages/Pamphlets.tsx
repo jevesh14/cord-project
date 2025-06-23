@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Filter, FileText, Eye } from 'lucide-react';
+import { Search, Filter, FileText, Eye, Download, ArrowRight } from 'lucide-react';
 
 interface Pamphlet {
   id: string;
@@ -185,11 +185,11 @@ export const Pamphlets = () => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'basic': return 'bg-coral/10 text-coral';
-      case 'medical': return 'bg-teal/10 text-teal';
-      case 'decision': return 'bg-lavender/20 text-navy';
-      case 'legal': return 'bg-navy/10 text-navy';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'basic': return 'bg-pink-primary/10 text-pink-primary';
+      case 'medical': return 'bg-pink-soft/10 text-pink-soft';
+      case 'decision': return 'bg-plum/10 text-plum';
+      case 'legal': return 'bg-pink-hover/10 text-pink-hover';
+      default: return 'bg-background-alt text-text-body';
     }
   };
 
@@ -199,58 +199,74 @@ export const Pamphlets = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group ${
-        featured ? 'ring-2 ring-coral/20' : ''
+      className={`bg-background-card rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ${
+        featured ? 'lg:col-span-2' : ''
       }`}
     >
-      <div className="relative">
-        <img
-          src={pamphlet.image}
-          alt={pamphlet.title}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-        <div className="absolute top-4 left-4 flex space-x-2">
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(pamphlet.category)}`}>
-            {categories.find(c => c.key === pamphlet.category)?.label}
-          </span>
-        </div>
-        <div className="absolute top-4 right-4">
-          <span className="px-2 py-1 bg-white/90 text-navy rounded-full text-xs font-medium">
-            {pamphlet.languageNative}
-          </span>
-        </div>
-        <div className="absolute bottom-4 right-4">
-          <span className="px-2 py-1 bg-black/60 text-white rounded text-xs">
-            {pamphlet.pages} pages
-          </span>
-        </div>
-      </div>
-      
-      <div className="p-6">
-        <h3 className="text-lg font-semibold text-navy mb-2 line-clamp-2">{pamphlet.title}</h3>
-        <p className="text-navy/70 text-sm mb-4 line-clamp-3">{pamphlet.description}</p>
-        
-        <div className="flex flex-wrap gap-1 mb-4">
-          {pamphlet.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
+      <div className="flex flex-col h-full">
+        <div className="relative">
+          <img
+            src={pamphlet.image}
+            alt={pamphlet.title}
+            className={`w-full object-cover ${featured ? 'h-64' : 'h-48'}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className={`font-semibold text-text-light mb-2 ${featured ? 'text-xl' : 'text-lg'}`}>
+              {pamphlet.title}
+            </h3>
+            <div className="flex items-center space-x-2">
+              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(pamphlet.category)}`}>
+                {categories.find(c => c.key === pamphlet.category)?.label}
+              </span>
+              <span className="text-text-light/90 text-sm">{pamphlet.languageNative}</span>
+            </div>
+          </div>
         </div>
 
-        <div className="flex space-x-2">
-          <button
-            onClick={() => {
-              // TODO: Connect to preview functionality
-            }}
-            className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 border border-coral text-coral rounded-lg hover:bg-coral/10 transition-colors duration-200 text-sm"
-          >
-            <Eye className="h-4 w-4" />
-            <span>Preview</span>
-          </button>
+        <div className="p-6 flex-1 flex flex-col">
+          <p className="text-text-body mb-4">{pamphlet.description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-4">
+            {pamphlet.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-background-alt rounded-lg text-text-body text-xs"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-auto">
+            <div className="flex items-center justify-between text-sm text-text-body mb-4">
+              <div className="flex items-center space-x-2">
+                <FileText className="h-4 w-4" />
+                <span>{pamphlet.pages} pages</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Download className="h-4 w-4" />
+                <span>{pamphlet.downloadCount.toLocaleString()} downloads</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <a
+                href={pamphlet.previewUrl}
+                className="flex-1 py-2 px-4 bg-background-alt text-plum rounded-xl hover:bg-pink-soft/10 transition-colors duration-200 flex items-center justify-center space-x-2"
+              >
+                <Eye className="h-4 w-4" />
+                <span>Preview</span>
+              </a>
+              <a
+                href={pamphlet.downloadUrl}
+                className="flex-1 py-2 px-4 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200 flex items-center justify-center space-x-2"
+              >
+                <Download className="h-4 w-4" />
+                <span>Download</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -262,41 +278,54 @@ export const Pamphlets = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+      className="bg-background-card rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
     >
-      <div className="flex items-start space-x-6">
-        <img
-          src={pamphlet.image}
-          alt={pamphlet.title}
-          className="w-24 h-32 object-cover rounded-lg flex-shrink-0"
-        />
-        <div className="flex-1">
-          <div className="flex items-start justify-between mb-3">
+      <div className="flex">
+        <div className="w-48 h-32 flex-shrink-0">
+          <img
+            src={pamphlet.image}
+            alt={pamphlet.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="flex-1 p-4">
+          <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="text-xl font-semibold text-navy mb-1">{pamphlet.title}</h3>
-              <p className="text-navy/60 text-sm">{pamphlet.languageNative} • {pamphlet.pages} pages</p>
+              <h3 className="text-lg font-semibold text-plum mb-2">{pamphlet.title}</h3>
+              <p className="text-text-body text-sm mb-2">{pamphlet.description}</p>
             </div>
             <div className="flex items-center space-x-2">
+              <a
+                href={pamphlet.previewUrl}
+                className="p-2 bg-background-alt text-plum rounded-xl hover:bg-pink-soft/10 transition-colors duration-200"
+              >
+                <Eye className="h-5 w-5" />
+              </a>
+              <a
+                href={pamphlet.downloadUrl}
+                className="p-2 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200"
+              >
+                <Download className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center space-x-4">
               <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(pamphlet.category)}`}>
                 {categories.find(c => c.key === pamphlet.category)?.label}
               </span>
+              <span className="text-text-body text-sm">{pamphlet.languageNative}</span>
             </div>
-          </div>
-          
-          <p className="text-navy/70 mb-4">{pamphlet.description}</p>
-          
-          <div className="flex items-center justify-between">
-            <div />
-            <div className="flex space-x-2">
-              <button
-                onClick={() => {
-                  // TODO: Connect to preview functionality
-                }}
-                className="flex items-center space-x-1 px-4 py-2 border border-coral text-coral rounded-lg hover:bg-coral/10 transition-colors duration-200 text-sm"
-              >
-                <Eye className="h-4 w-4" />
-                <span>Preview</span>
-              </button>
+            <div className="flex items-center space-x-4 text-sm text-text-body">
+              <div className="flex items-center space-x-1">
+                <FileText className="h-4 w-4" />
+                <span>{pamphlet.pages} pages</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <Download className="h-4 w-4" />
+                <span>{pamphlet.downloadCount.toLocaleString()}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -305,9 +334,9 @@ export const Pamphlets = () => {
   );
 
   return (
-    <div className="min-h-screen bg-ivory pt-20">
+    <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-navy to-navy/90 text-white">
+      <section className="py-16 bg-gradient-to-br from-plum to-plum/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -315,142 +344,139 @@ export const Pamphlets = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <FileText className="h-16 w-16 mx-auto mb-6 text-coral" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <FileText className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
+            <h1 className="text-4xl md:text-5xl font-bold text-text-light mb-6">
               Educational Resources
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Download comprehensive guides, brochures, and educational materials 
-              about cord blood banking in multiple languages.
+            <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
+              Download comprehensive guides and pamphlets about cord blood banking in multiple languages.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Featured Pamphlets */}
-      <section className="py-16 bg-white">
+      <section className="py-12 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              Featured Resources
-            </h2>
-            <p className="text-xl text-navy/70">
-              Our most popular and comprehensive educational materials
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredPamphlets.map((pamphlet) => (
-              <PamphletCard key={pamphlet.id} pamphlet={pamphlet} featured={true} />
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-plum">Featured Resources</h2>
+            <a
+              href="#all-resources"
+              className="flex items-center space-x-2 text-pink-primary hover:text-pink-hover transition-colors duration-200"
+            >
+              <span>View all resources</span>
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {featuredPamphlets.map(pamphlet => (
+              <PamphletCard key={pamphlet.id} pamphlet={pamphlet} featured />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Search and Filters */}
-      <section className="py-8 bg-gray-50 border-b border-gray-100">
+      {/* All Pamphlets */}
+      <section id="all-resources" className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-navy/60" />
-              <input
-                type="text"
-                placeholder="Search pamphlets..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral transition-colors duration-200"
-              />
+          {/* Search and Filters */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+            <div className="flex-1 w-full md:max-w-md">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-body" />
+                <input
+                  type="text"
+                  placeholder="Search resources..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-background-card border border-pink-soft/20 text-plum placeholder-text-body/60 focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
+                />
+              </div>
             </div>
 
-            {/* Filters */}
-            <div className="flex flex-wrap items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Filter className="h-5 w-5 text-navy/60" />
-                <span className="text-sm font-medium text-navy">Filters:</span>
-              </div>
-              
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral text-sm"
-              >
-                <option value="all">All Languages</option>
-                {languages.map((language) => (
-                  <option key={language} value={language}>{language}</option>
-                ))}
-              </select>
-
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral text-sm"
-              >
-                <option value="all">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category.key} value={category.key}>{category.label}</option>
-                ))}
-              </select>
-
-              <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'grid'
-                      ? 'bg-white text-coral shadow-sm'
-                      : 'text-navy/60 hover:text-navy'
-                  }`}
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <Filter className="h-5 w-5 text-text-body" />
+                  <span className="text-sm font-medium text-plum">Filter by:</span>
+                </div>
+                <select
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                  className="px-4 py-2 bg-background-card border border-pink-soft/20 rounded-xl text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
                 >
-                  Grid
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'list'
-                      ? 'bg-white text-coral shadow-sm'
-                      : 'text-navy/60 hover:text-navy'
-                  }`}
+                  <option value="all">All Languages</option>
+                  {languages.map(lang => (
+                    <option key={lang} value={lang}>{lang}</option>
+                  ))}
+                </select>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-4 py-2 bg-background-card border border-pink-soft/20 rounded-xl text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
                 >
-                  List
-                </button>
+                  <option value="all">All Categories</option>
+                  {categories.map(cat => (
+                    <option key={cat.key} value={cat.key}>{cat.label}</option>
+                  ))}
+                </select>
               </div>
+
+              <button
+                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+                className="px-4 py-2 bg-background-card text-plum rounded-xl border border-pink-soft/20 hover:bg-pink-soft/10 transition-colors duration-200"
+              >
+                {viewMode === 'grid' ? 'List View' : 'Grid View'}
+              </button>
             </div>
           </div>
 
-          <div className="mt-4 text-sm text-navy/60">
-            Showing {filteredPamphlets.length} of {pamphlets.length} resources
-          </div>
-        </div>
-      </section>
-
-      {/* Pamphlets Display */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPamphlets.length === 0 ? (
-            <div className="text-center py-12">
-              <FileText className="h-16 w-16 mx-auto mb-4 text-navy/30" />
-              <h3 className="text-xl font-semibold text-navy mb-2">No resources found</h3>
-              <p className="text-navy/60">Try adjusting your search criteria or filters.</p>
-            </div>
-          ) : viewMode === 'grid' ? (
+          {/* Results */}
+          {viewMode === 'grid' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPamphlets.map((pamphlet) => (
+              {filteredPamphlets.map(pamphlet => (
                 <PamphletCard key={pamphlet.id} pamphlet={pamphlet} />
               ))}
             </div>
           ) : (
-            <div className="space-y-6">
-              {filteredPamphlets.map((pamphlet) => (
+            <div className="space-y-4">
+              {filteredPamphlets.map(pamphlet => (
                 <PamphletListItem key={pamphlet.id} pamphlet={pamphlet} />
               ))}
             </div>
           )}
+
+          {filteredPamphlets.length === 0 && (
+            <div className="text-center py-12">
+              <FileText className="h-16 w-16 mx-auto mb-4 text-pink-soft" />
+              <h3 className="text-xl font-semibold text-plum mb-2">
+                No resources found
+              </h3>
+              <p className="text-text-body">
+                Try adjusting your search or filters to find what you're looking for.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Request Resources CTA */}
+      <section className="py-16 bg-background-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-plum to-plum/90 rounded-2xl p-8 md:p-12">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-text-light mb-4">
+                Need Something Specific?
+              </h2>
+              <p className="text-text-light/90 mb-8">
+                Can't find what you're looking for? Request resources in your preferred language or topic.
+              </p>
+              <button className="inline-flex items-center space-x-2 px-6 py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200">
+                <span>Request Resources</span>
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

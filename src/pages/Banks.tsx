@@ -168,16 +168,16 @@ export const Banks = () => {
 
   const getBankTypeClasses = (type: 'public' | 'private') => {
     return type === 'public' 
-      ? 'bg-teal/10 text-teal' 
-      : 'bg-coral/10 text-coral';
+      ? 'bg-pink-soft/10 text-pink-soft' 
+      : 'bg-pink-primary/10 text-pink-primary';
   };
 
   const getBankIconClasses = (type: 'public' | 'private') => {
-    return type === 'public' ? 'bg-teal/10' : 'bg-coral/10';
+    return type === 'public' ? 'bg-pink-soft/10' : 'bg-pink-primary/10';
   };
 
   const getBankIconColor = (type: 'public' | 'private') => {
-    return type === 'public' ? 'text-teal' : 'text-coral';
+    return type === 'public' ? 'text-pink-soft' : 'text-pink-primary';
   };
 
   const BankCard = ({ bank }: { bank: CordBank }) => (
@@ -185,85 +185,75 @@ export const Banks = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+      className="bg-background-card rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
     >
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-semibold text-navy mb-2">{bank.name}</h3>
+            <h3 className="text-xl font-semibold text-plum mb-2">{bank.name}</h3>
             <div className="flex items-center space-x-2 mb-2">
               <span className={`px-3 py-1 rounded-full text-xs font-medium ${getBankTypeClasses(bank.type)}`}>
                 {bank.type === 'public' ? 'Public Bank' : 'Private Bank'}
               </span>
-              <span className="text-navy/60 text-sm">Est. {bank.established}</span>
+              <span className="text-text-body text-sm">Est. {bank.established}</span>
             </div>
           </div>
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bank.name + ', ' + bank.city + ', ' + bank.state)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 bg-coral/10 text-coral rounded-lg hover:bg-coral/20 transition-colors duration-200 flex items-center"
-            title="View on Google Maps"
-          >
-            <MapPin className="h-6 w-6" />
-          </a>
+          <div className={`p-3 rounded-xl ${getBankIconClasses(bank.type)}`}>
+            <Building className={`h-6 w-6 ${getBankIconColor(bank.type)}`} />
+          </div>
         </div>
 
-        <div className="space-y-3 mb-4">
-          <div className="flex items-center space-x-2 text-navy/70">
-            <MapPin className="h-4 w-4" />
-            <span className="text-sm">{bank.city}, {bank.state}</span>
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center space-x-2 text-text-body">
+            <MapPin className="h-4 w-4 flex-shrink-0" />
+            <span>{bank.city}, {bank.state}</span>
           </div>
-          <div className="flex items-center space-x-2 text-navy/70">
-            <Phone className="h-4 w-4" />
-            <a href={`tel:${bank.phone}`} className="text-sm hover:text-coral transition-colors">
+          <div className="flex items-center space-x-2 text-text-body">
+            <Phone className="h-4 w-4 flex-shrink-0" />
+            <a href={`tel:${bank.phone}`} className="hover:text-pink-primary transition-colors duration-200">
               {bank.phone}
             </a>
           </div>
-          <div className="flex items-center space-x-2 text-navy/70">
-            <Mail className="h-4 w-4" />
-            <a href={`mailto:${bank.email}`} className="text-sm hover:text-coral transition-colors">
+          <div className="flex items-center space-x-2 text-text-body">
+            <Mail className="h-4 w-4 flex-shrink-0" />
+            <a href={`mailto:${bank.email}`} className="hover:text-pink-primary transition-colors duration-200">
               {bank.email}
             </a>
           </div>
-          <div className="flex items-center space-x-2 text-navy/70">
-            <Globe className="h-4 w-4" />
-            <a 
-              href={bank.website} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm hover:text-coral transition-colors"
-            >
-              Visit Website
+          <div className="flex items-center space-x-2 text-text-body">
+            <Globe className="h-4 w-4 flex-shrink-0" />
+            <a href={bank.website} target="_blank" rel="noopener noreferrer" className="hover:text-pink-primary transition-colors duration-200">
+              {bank.website.replace('https://', '')}
             </a>
           </div>
         </div>
 
-        <div className="mb-4">
-          <h4 className="text-sm font-medium text-navy mb-2">Services</h4>
-          <div className="flex flex-wrap gap-1">
-            {bank.services.map((service) => (
-              <span
-                key={service}
-                className="px-2 py-1 bg-lavender/20 text-navy text-xs rounded-full"
-              >
-                {service}
-              </span>
-            ))}
+        <div className="space-y-3">
+          <div>
+            <h4 className="text-sm font-semibold text-plum mb-2">Services</h4>
+            <div className="flex flex-wrap gap-2">
+              {bank.services.map((service, index) => (
+                <span
+                  key={index}
+                  className="px-2 py-1 bg-background-alt rounded-lg text-text-body text-sm"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div>
-          <h4 className="text-sm font-medium text-navy mb-2">Accreditation</h4>
-          <div className="flex flex-wrap gap-1">
-            {bank.accreditation.map((acc) => (
-              <span
-                key={acc}
-                className="px-2 py-1 bg-teal/10 text-teal text-xs rounded-full font-medium"
-              >
-                {acc}
-              </span>
-            ))}
+          <div>
+            <h4 className="text-sm font-semibold text-plum mb-2">Accreditation</h4>
+            <div className="flex flex-wrap gap-2">
+              {bank.accreditation.map((accred, index) => (
+                <span
+                  key={index}
+                  className="px-2 py-1 bg-pink-soft/5 rounded-lg text-pink-primary text-sm"
+                >
+                  {accred}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -304,9 +294,9 @@ export const Banks = () => {
   );
 
   return (
-    <div className="min-h-screen bg-ivory pt-20">
+    <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-navy to-navy/90 text-white">
+      <section className="py-16 bg-gradient-to-br from-plum to-plum/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -314,138 +304,221 @@ export const Banks = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <Building className="h-16 w-16 mx-auto mb-6 text-coral" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Cord Blood Banks in India
+            <Building className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
+            <h1 className="text-4xl md:text-5xl font-bold text-text-light mb-6">
+              Find Cord Blood Banks
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Find accredited cord blood banking facilities across India. 
-              Compare services, locations, and choose the right bank for your family.
+            <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
+              Discover accredited cord blood banks across India and find the right one for your family.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Filters and Search */}
-      <section className="py-8 bg-white border-b border-gray-100">
+      {/* Search and Filter Section */}
+      <section className="py-8 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+          <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-navy/60" />
-              <input
-                type="text"
-                placeholder="Search by name, city, or state..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral transition-colors duration-200"
-              />
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-body" />
+                <input
+                  type="text"
+                  placeholder="Search by name, city, or state..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-background-card border border-pink-soft/20 text-plum placeholder-text-body/60 focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
+                />
+              </div>
             </div>
 
             {/* Filters */}
-            <div className="flex flex-wrap items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Filter className="h-5 w-5 text-navy/60" />
-                <span className="text-sm font-medium text-navy">Filters:</span>
+            <div className="flex gap-4">
+              <div className="w-48">
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value as 'all' | 'public' | 'private')}
+                  className="w-full px-4 py-3 rounded-xl bg-background-card border border-pink-soft/20 text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
+                >
+                  <option value="all">All Types</option>
+                  <option value="public">Public Banks</option>
+                  <option value="private">Private Banks</option>
+                </select>
               </div>
-              
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value as 'all' | 'public' | 'private')}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral text-sm"
-              >
-                <option value="all">All Types</option>
-                <option value="public">Public Banks</option>
-                <option value="private">Private Banks</option>
-              </select>
-
-              <select
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral/20 focus:border-coral text-sm"
-              >
-                <option value="all">All Cities</option>
-                {cities.map((city) => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </select>
-
+              <div className="w-48">
+                <select
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-background-card border border-pink-soft/20 text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
+                >
+                  <option value="all">All Cities</option>
+                  {cities.map(city => (
+                    <option key={city} value={city}>{city}</option>
+                  ))}
+                </select>
+              </div>
               <button
                 onClick={handleUseMyLocation}
-                className="flex items-center space-x-2 px-4 py-2 bg-coral text-white rounded-lg hover:bg-coral/90 transition-colors duration-200"
+                className="px-4 py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200 flex items-center space-x-2"
               >
-                <MapPin className="h-4 w-4" />
+                <MapPin className="h-5 w-5" />
                 <span>Use My Location</span>
               </button>
-
-              <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'grid'
-                      ? 'bg-white text-coral shadow-sm'
-                      : 'text-navy/60 hover:text-navy'
-                  }`}
-                >
-                  Grid
-                </button>
-                <button
-                  onClick={() => setViewMode('table')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === 'table'
-                      ? 'bg-white text-coral shadow-sm'
-                      : 'text-navy/60 hover:text-navy'
-                  }`}
-                >
-                  Table
-                </button>
-              </div>
+              <button
+                onClick={() => setViewMode(viewMode === 'grid' ? 'table' : 'grid')}
+                className="px-4 py-3 bg-background-card text-plum rounded-xl border border-pink-soft/20 hover:bg-pink-soft/10 transition-colors duration-200"
+              >
+                {viewMode === 'grid' ? 'Table View' : 'Grid View'}
+              </button>
             </div>
-          </div>
-
-          <div className="mt-4 text-sm text-navy/60">
-            Showing {filteredBanks.length} of {cordBanks.length} cord blood banks
           </div>
         </div>
       </section>
 
-      {/* Banks Display */}
+      {/* Results Section */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredBanks.length === 0 ? (
-            <div className="text-center py-12">
-              <Building className="h-16 w-16 mx-auto mb-4 text-navy/30" />
-              <h3 className="text-xl font-semibold text-navy mb-2">No banks found</h3>
-              <p className="text-navy/60">Try adjusting your search criteria or filters.</p>
+          {/* Results Count */}
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-plum">
+              {filteredBanks.length} {filteredBanks.length === 1 ? 'Bank' : 'Banks'} Found
+            </h2>
+            <div className="flex items-center space-x-2 text-text-body">
+              <Filter className="h-5 w-5" />
+              <span>Showing results for: {selectedType === 'all' ? 'All Types' : `${selectedType} Banks`}</span>
             </div>
-          ) : viewMode === 'grid' ? (
+          </div>
+
+          {/* Results Grid/Table */}
+          {viewMode === 'grid' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredBanks.map((bank) => (
+              {filteredBanks.map(bank => (
                 <BankCard key={bank.id} bank={bank} />
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-navy">Bank Name</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-navy">Type</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-navy">Phone</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-navy">Email</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-navy">Website</th>
+            <div className="bg-background-card rounded-2xl shadow-lg overflow-hidden">
+              <table className="w-full">
+                <thead className="bg-background-alt">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-plum">Name</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-plum">Type</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-plum">Location</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-plum">Contact</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-plum">Services</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-pink-soft/10">
+                  {filteredBanks.map(bank => (
+                    <tr key={bank.id} className="hover:bg-pink-soft/5 transition-colors duration-200">
+                      <td className="px-6 py-4">
+                        <div>
+                          <h3 className="font-medium text-plum">{bank.name}</h3>
+                          <p className="text-sm text-text-body">Est. {bank.established}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getBankTypeClasses(bank.type)}`}>
+                          {bank.type === 'public' ? 'Public' : 'Private'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center space-x-2 text-text-body">
+                          <MapPin className="h-4 w-4" />
+                          <span>{bank.city}, {bank.state}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="space-y-1">
+                          <a href={`tel:${bank.phone}`} className="flex items-center space-x-2 text-text-body hover:text-pink-primary">
+                            <Phone className="h-4 w-4" />
+                            <span>{bank.phone}</span>
+                          </a>
+                          <a href={`mailto:${bank.email}`} className="flex items-center space-x-2 text-text-body hover:text-pink-primary">
+                            <Mail className="h-4 w-4" />
+                            <span>{bank.email}</span>
+                          </a>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-wrap gap-2">
+                          {bank.services.slice(0, 2).map((service, index) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 bg-background-alt rounded-lg text-text-body text-sm"
+                            >
+                              {service}
+                            </span>
+                          ))}
+                          {bank.services.length > 2 && (
+                            <span className="px-2 py-1 text-text-body text-sm">
+                              +{bank.services.length - 2} more
+                            </span>
+                          )}
+                        </div>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filteredBanks.map((bank) => (
-                      <BankTableRow key={bank.id} bank={bank} />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Info Section */}
+      <section className="py-16 bg-background-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-background-card p-6 rounded-2xl shadow-lg"
+            >
+              <div className="w-12 h-12 bg-pink-primary/10 rounded-xl flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-pink-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-plum mb-2">Accredited Banks</h3>
+              <p className="text-text-body">
+                All listed banks meet strict quality standards and are accredited by recognized organizations.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-background-card p-6 rounded-2xl shadow-lg"
+            >
+              <div className="w-12 h-12 bg-pink-primary/10 rounded-xl flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-pink-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-plum mb-2">Expert Support</h3>
+              <p className="text-text-body">
+                Get guidance from medical professionals to help you make informed decisions.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-background-card p-6 rounded-2xl shadow-lg"
+            >
+              <div className="w-12 h-12 bg-pink-primary/10 rounded-xl flex items-center justify-center mb-4">
+                <Globe className="h-6 w-6 text-pink-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-plum mb-2">Pan-India Network</h3>
+              <p className="text-text-body">
+                Access a wide network of cord blood banks across major cities in India.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>

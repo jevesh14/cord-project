@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Play, Download, ExternalLink, BookOpen, Video, FileText, HelpCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp, Play, Download, ExternalLink, BookOpen, Video, FileText, HelpCircle, Phone, Mail } from 'lucide-react';
 
 export const Learn = () => {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
@@ -153,9 +153,9 @@ export const Learn = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ivory pt-20">
+    <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-navy to-navy/90 text-white">
+      <section className="py-16 bg-gradient-to-br from-plum to-plum/90 text-text-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -163,11 +163,11 @@ export const Learn = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <BookOpen className="h-16 w-16 mx-auto mb-6 text-coral" />
+            <BookOpen className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Learn About Cord Blood Banking
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
               Get comprehensive information about umbilical cord blood, its benefits, 
               and how it can impact your family's future health.
             </p>
@@ -176,7 +176,7 @@ export const Learn = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-16 bg-gradient-to-br from-white to-ivory">
+      <section id="faq" className="py-16 bg-gradient-to-br from-background-card to-background-main">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -185,13 +185,13 @@ export const Learn = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-coral/10 rounded-full mb-6">
-              <HelpCircle className="h-8 w-8 text-coral" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
+              <HelpCircle className="h-8 w-8 text-pink-primary" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-navy/70 max-w-3xl mx-auto">
+            <p className="text-xl text-text-body max-w-3xl mx-auto">
               Get comprehensive answers to the most common questions about cord blood banking, 
               from collection to storage and everything in between.
             </p>
@@ -205,53 +205,30 @@ export const Learn = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
+                className="bg-background-card rounded-2xl shadow-sm"
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-coral/20 rounded-2xl hover:bg-gray-50/50 transition-colors duration-200"
+                  className="w-full px-6 py-4 flex items-center justify-between text-left"
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-coral/10 rounded-full flex items-center justify-center mt-1">
-                      <span className="text-coral font-semibold text-sm">{index + 1}</span>
-                    </div>
-                    <span className="font-semibold text-navy text-lg leading-relaxed">{faq.question}</span>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    {activeAccordion === index ? (
-                      <motion.div
-                        initial={{ rotate: 0 }}
-                        animate={{ rotate: 180 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ChevronUp className="h-6 w-6 text-coral" />
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        initial={{ rotate: 0 }}
-                        animate={{ rotate: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ChevronDown className="h-6 w-6 text-navy/60 group-hover:text-coral transition-colors duration-200" />
-                      </motion.div>
-                    )}
-                  </div>
+                  <h3 className="text-lg font-semibold text-plum pr-8">{faq.question}</h3>
+                  {activeAccordion === index ? (
+                    <ChevronUp className="h-5 w-5 text-pink-primary flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-pink-primary flex-shrink-0" />
+                  )}
                 </button>
                 <AnimatePresence>
                   {activeAccordion === index && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
+                      animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 ml-12">
-                        <div className="border-l-4 border-coral/30 pl-6">
-                          <p className="text-navy/80 leading-relaxed text-base">
-                            {faq.answer}
-                          </p>
-                        </div>
+                      <div className="px-6 pb-4">
+                        <p className="text-text-body">{faq.answer}</p>
                       </div>
                     </motion.div>
                   )}
@@ -259,43 +236,11 @@ export const Learn = () => {
               </motion.div>
             ))}
           </div>
-          
-          {/* FAQ Footer */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-navy mb-3">
-                Still have questions?
-              </h3>
-              <p className="text-navy/70 mb-4">
-                Our comprehensive resources and expert information are here to help you make the best decision for your family.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="/banks"
-                  className="px-6 py-3 bg-coral text-white font-medium rounded-xl hover:bg-coral/90 transition-colors duration-200"
-                >
-                  Find Cord Blood Banks
-                </a>
-                <a
-                  href="/stories"
-                  className="px-6 py-3 bg-navy/10 text-navy font-medium rounded-xl hover:bg-navy/20 transition-colors duration-200"
-                >
-                  Read Success Stories
-                </a>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
-      {/* Myths vs Facts */}
-      <section id="myths" className="py-16 bg-gradient-to-br from-ivory to-white">
+      {/* Myths vs Facts Section */}
+      <section id="myths" className="py-16 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -304,15 +249,11 @@ export const Learn = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-coral/10 rounded-full mb-6">
-              <HelpCircle className="h-8 w-8 text-coral" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
               Myths vs Facts
             </h2>
-            <p className="text-xl text-navy/70 mb-8 max-w-3xl mx-auto">
-              Discover the truth behind common misconceptions about cord blood banking. 
-              Click on each card to reveal the facts that matter most to your family.
+            <p className="text-xl text-text-body max-w-3xl mx-auto">
+              Let's clear up some common misconceptions about cord blood banking
             </p>
           </motion.div>
 
@@ -320,90 +261,35 @@ export const Learn = () => {
             {mythsVsFacts.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative h-80 cursor-pointer group"
+                className={`relative h-64 perspective-1000 cursor-pointer ${
+                  flippedCards.has(index) ? 'rotate-y-180' : ''
+                }`}
                 onClick={() => toggleFlipCard(index)}
               >
-                <motion.div
-                  animate={{ rotateY: flippedCards.has(index) ? 180 : 0 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="w-full h-full relative preserve-3d"
-                  style={{ transformStyle: 'preserve-3d' }}
-                >
-                  {/* Myth Side */}
-                  <div 
-                    className="absolute inset-0 backface-hidden bg-gradient-to-br from-coral to-coral/80 text-white p-6 rounded-2xl shadow-xl flex flex-col justify-center border-2 border-coral/20"
-                    style={{ backfaceVisibility: 'hidden' }}
-                  >
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold mb-4 text-white">MYTH</h3>
-                      <p className="text-lg leading-relaxed text-white mb-4 font-medium">{item.myth}</p>
-                      <div className="flex items-center justify-center space-x-2 text-white/90 text-sm">
-                        <span>Click to reveal the truth</span>
-                        <motion.div
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          →
-                        </motion.div>
-                      </div>
-                    </div>
+                <div className="absolute inset-0 backface-hidden">
+                  <div className="h-full p-6 bg-background-card rounded-2xl shadow-lg flex flex-col justify-center">
+                    <h3 className="text-lg font-semibold text-pink-primary mb-4">Myth:</h3>
+                    <p className="text-text-body">{item.myth}</p>
                   </div>
-                  
-                  {/* Fact Side */}
-                  <div 
-                    className="absolute inset-0 backface-hidden bg-gradient-to-br from-teal to-teal/80 text-white p-6 rounded-2xl shadow-xl flex flex-col justify-center border-2 border-teal/20 rotate-y-180"
-                    style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                  >
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold mb-4 text-white">FACT</h3>
-                      <p className="text-lg leading-relaxed text-white mb-4 font-medium">{item.fact}</p>
-                      <div className="flex items-center justify-center space-x-2 text-white/90 text-sm">
-                        <motion.div
-                          animate={{ x: [0, -5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          ←
-                        </motion.div>
-                        <span>Click to see the myth</span>
-                      </div>
-                    </div>
+                </div>
+                <div className="absolute inset-0 backface-hidden rotate-y-180">
+                  <div className="h-full p-6 bg-pink-primary rounded-2xl shadow-lg flex flex-col justify-center">
+                    <h3 className="text-lg font-semibold text-text-light mb-4">Fact:</h3>
+                    <p className="text-text-light/90">{item.fact}</p>
                   </div>
-                </motion.div>
-                
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
               </motion.div>
             ))}
           </div>
-          
-          {/* Additional info box */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-12 bg-white rounded-2xl shadow-lg p-6 border border-gray-100"
-          >
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-navy mb-3">
-                💡 Did You Know?
-              </h3>
-              <p className="text-navy/70 leading-relaxed">
-                Cord blood transplants have been performed successfully for over 30 years, with over 40,000 transplants worldwide. 
-                The first cord blood transplant was performed in 1988, and since then, the technology has saved countless lives 
-                and continues to advance with ongoing research and clinical trials.
-              </p>
-            </div>
-          </motion.div>
         </div>
       </section>
 
-      {/* Video Gallery */}
-      <section className="py-16 bg-white">
+      {/* Educational Videos Section */}
+      <section className="py-16 bg-background-main">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -412,45 +298,48 @@ export const Learn = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Video className="h-12 w-12 mx-auto mb-4 text-coral" />
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
+              <Video className="h-8 w-8 text-pink-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
               Educational Videos
             </h2>
-            <p className="text-xl text-navy/70">
-              Watch informative videos about cord blood banking and treatments
+            <p className="text-xl text-text-body max-w-3xl mx-auto">
+              Watch our informative videos to learn more about cord blood banking
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videos.map((video, index) => (
               <motion.div
                 key={video.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group cursor-pointer"
-                onClick={() => {
-                  // TODO: Connect to video player or YouTube integration
-                  setSelectedVideo(video.id);
-                }}
+                className="bg-background-card rounded-2xl overflow-hidden shadow-lg group"
               >
-                <div className="relative">
+                <div className="relative aspect-video">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Play className="h-16 w-16 text-white" fill="currentColor" />
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-sm">
+                  <button
+                    onClick={() => setSelectedVideo(video.id)}
+                    className="absolute inset-0 flex items-center justify-center bg-plum/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="w-16 h-16 flex items-center justify-center rounded-full bg-pink-primary text-text-light">
+                      <Play className="h-8 w-8" />
+                    </div>
+                  </button>
+                  <div className="absolute bottom-2 right-2 px-2 py-1 bg-plum/80 text-text-light text-sm rounded">
                     {video.duration}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-navy mb-2">{video.title}</h3>
-                  <p className="text-navy/70 text-sm">{video.description}</p>
+                  <h3 className="text-lg font-semibold text-plum mb-2">{video.title}</h3>
+                  <p className="text-text-body">{video.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -458,8 +347,8 @@ export const Learn = () => {
         </div>
       </section>
 
-      {/* Infographics */}
-      <section className="py-16 bg-ivory">
+      {/* Downloadable Resources Section */}
+      <section className="py-16 bg-background-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -468,45 +357,104 @@ export const Learn = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              Visual Learning Resources
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
+              <Download className="h-8 w-8 text-pink-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
+              Downloadable Resources
             </h2>
-            <p className="text-xl text-navy/70">
-              Download comprehensive infographics and visual guides
+            <p className="text-xl text-text-body max-w-3xl mx-auto">
+              Access our collection of infographics and educational materials
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {infographics.map((infographic, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {infographics.map((resource, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+                className="bg-background-card rounded-2xl overflow-hidden shadow-lg group"
               >
-                <div className="relative">
+                <div className="relative aspect-video">
                   <img
-                    src={infographic.image}
-                    alt={infographic.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Download className="h-12 w-12 text-white" />
+                  <div className="absolute inset-0 bg-plum/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <a
+                      href={resource.downloadUrl}
+                      className="px-6 py-3 bg-pink-primary text-text-light rounded-full flex items-center space-x-2 hover:bg-pink-hover transition-colors duration-300"
+                    >
+                      <Download className="h-5 w-5" />
+                      <span>Download</span>
+                    </a>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-navy mb-2">{infographic.title}</h3>
-                  <p className="text-navy/70 text-sm mb-4">{infographic.description}</p>
-                  <button
-                    onClick={() => {
-                      // TODO: Connect to actual download functionality
-                    }}
-                    className="w-full bg-coral text-white py-2 px-4 rounded-lg hover:bg-coral/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-                  >
-                    <Download className="h-4 w-4" />
-                    <span>Download</span>
+                  <h3 className="text-lg font-semibold text-plum mb-2">{resource.title}</h3>
+                  <p className="text-text-body">{resource.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* In-Depth Articles Section */}
+      <section className="py-16 bg-background-main">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
+              <FileText className="h-8 w-8 text-pink-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
+              In-Depth Articles
+            </h2>
+            <p className="text-xl text-text-body max-w-3xl mx-auto">
+              Explore detailed articles about cord blood banking and its implications
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articles.map((article, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-background-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex space-x-2">
+                    {article.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-pink-soft/10 text-pink-primary text-sm rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-text-body text-sm">{article.readTime}</span>
+                </div>
+                <h3 className="text-lg font-semibold text-plum mb-2">{article.title}</h3>
+                <p className="text-text-body mb-4">{article.description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-text-body text-sm">{article.date}</span>
+                  <button className="flex items-center space-x-1 text-pink-primary hover:text-pink-hover transition-colors duration-200">
+                    <span>Read More</span>
+                    <ExternalLink className="h-4 w-4" />
                   </button>
                 </div>
               </motion.div>
@@ -515,61 +463,39 @@ export const Learn = () => {
         </div>
       </section>
 
-      {/* Articles */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Still Have Questions Section */}
+      <section className="py-16 bg-background-alt">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
           >
-            <FileText className="h-12 w-12 mx-auto mb-4 text-coral" />
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              In-Depth Articles
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-6">
+              Still Have Questions?
             </h2>
-            <p className="text-xl text-navy/70">
-              Comprehensive guides and detailed information about cord blood banking
+            <p className="text-xl text-text-body mb-8">
+              Our team of experts is here to help you make an informed decision about 
+              cord blood banking. Get in touch with us today.
             </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {articles.map((article, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
-                onClick={() => {
-                  // TODO: Connect to article detail page
-                }}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="tel:+911234567890"
+                className="px-8 py-4 bg-pink-primary text-text-light font-semibold rounded-2xl hover:bg-pink-hover hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-navy/60">{article.date}</span>
-                  <span className="text-sm text-coral font-medium">{article.readTime}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-navy mb-3 group-hover:text-coral transition-colors duration-200">
-                  {article.title}
-                </h3>
-                <p className="text-navy/70 mb-4 text-sm leading-relaxed">{article.description}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-coral/10 text-coral text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                <Phone className="h-5 w-5" />
+                <span>Call Us</span>
+              </a>
+              <a
+                href="mailto:info@sanjeevnystem.org"
+                className="px-8 py-4 bg-background-card text-plum font-semibold rounded-2xl border border-pink-soft/20 hover:bg-pink-soft/10 hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+              >
+                <Mail className="h-5 w-5" />
+                <span>Email Us</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

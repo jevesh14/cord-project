@@ -257,7 +257,7 @@ export const Learn = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-8">
             {mythsVsFacts.map((item, index) => (
               <motion.div
                 key={index}
@@ -265,22 +265,53 @@ export const Learn = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative h-64 perspective-1000 cursor-pointer ${
-                  flippedCards.has(index) ? 'rotate-y-180' : ''
-                }`}
-                onClick={() => toggleFlipCard(index)}
+                className="relative"
               >
-                <div className="absolute inset-0 backface-hidden">
-                  <div className="h-full p-6 bg-background-card rounded-2xl shadow-lg flex flex-col justify-center">
-                    <h3 className="text-lg font-semibold text-pink-primary mb-4">Myth:</h3>
-                    <p className="text-text-body">{item.myth}</p>
-                  </div>
-                </div>
-                <div className="absolute inset-0 backface-hidden rotate-y-180">
-                  <div className="h-full p-6 bg-pink-primary rounded-2xl shadow-lg flex flex-col justify-center">
-                    <h3 className="text-lg font-semibold text-text-light mb-4">Fact:</h3>
-                    <p className="text-text-light/90">{item.fact}</p>
-                  </div>
+                <div className="flex flex-col md:flex-row gap-4 items-stretch">
+                  <motion.div
+                    initial={{ x: -50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    className="flex-1"
+                  >
+                    <div className="h-full p-6 bg-background-card rounded-2xl shadow-lg border-2 border-pink-primary/20">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-pink-primary/10 flex items-center justify-center">
+                          <span className="text-pink-primary font-semibold">M</span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-pink-primary">Myth</h3>
+                      </div>
+                      <p className="text-text-body">{item.myth}</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: (index * 0.2) + 0.3 }}
+                    className="w-12 hidden md:flex items-center justify-center"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-pink-primary flex items-center justify-center transform rotate-45">
+                      <span className="text-text-light text-2xl transform -rotate-45">→</span>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: (index * 0.2) + 0.4 }}
+                    className="flex-1"
+                  >
+                    <div className="h-full p-6 bg-pink-primary rounded-2xl shadow-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-text-light/10 flex items-center justify-center">
+                          <span className="text-text-light font-semibold">F</span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-text-light">Fact</h3>
+                      </div>
+                      <p className="text-text-light/90">{item.fact}</p>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}

@@ -229,15 +229,6 @@ export const Events = () => {
               </span>
             ))}
           </div>
-
-          {event.status === 'upcoming' && (
-            <button
-              className="w-full py-3 bg-pink-primary text-text-light rounded-xl hover:bg-pink-hover transition-colors duration-200 flex items-center justify-center space-x-2"
-            >
-              <Plus className="h-5 w-5" />
-              <span>Register Now</span>
-            </button>
-          )}
         </div>
       </motion.div>
     );

@@ -517,7 +517,6 @@ export const Learn = () => {
               </a>
               <a
                 href="mailto:advikasahney123@gmail.com"
-                target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-background-card text-plum font-semibold rounded-2xl border border-pink-soft/20 hover:bg-pink-soft/10 hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
               >

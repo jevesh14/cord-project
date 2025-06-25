@@ -180,9 +180,8 @@ export const Learn = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
             className="text-center mb-12"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
@@ -244,9 +243,8 @@ export const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
@@ -272,6 +270,7 @@ export const Learn = () => {
                     initial={{ x: -50, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
+                    viewport={{ once: true }}
                     className="flex-1"
                   >
                     <div className="h-full p-6 bg-background-card rounded-2xl shadow-lg border-2 border-pink-primary/20">
@@ -289,6 +288,7 @@ export const Learn = () => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.3, delay: (index * 0.2) + 0.3 }}
+                    viewport={{ once: true }}
                     className="w-12 hidden md:flex items-center justify-center"
                   >
                     <div className="w-12 h-12 rounded-full bg-pink-primary flex items-center justify-center transform rotate-45">
@@ -300,6 +300,7 @@ export const Learn = () => {
                     initial={{ x: 50, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: (index * 0.2) + 0.4 }}
+                    viewport={{ once: true }}
                     className="flex-1"
                   >
                     <div className="h-full p-6 bg-pink-primary rounded-2xl shadow-lg">
@@ -324,9 +325,8 @@ export const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
             className="text-center mb-12"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
@@ -383,9 +383,8 @@ export const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
             className="text-center mb-12"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
@@ -440,9 +439,8 @@ export const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
             className="text-center mb-12"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-primary/10 rounded-full mb-6">
@@ -499,9 +497,8 @@ export const Learn = () => {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-plum mb-6">
               Still Have Questions?

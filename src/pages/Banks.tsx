@@ -198,9 +198,15 @@ export const Banks = () => {
               <span className="text-text-body text-sm">Est. {bank.established}</span>
             </div>
           </div>
-          <div className={`p-3 rounded-xl ${getBankIconClasses(bank.type)}`}>
-            <Building className={`h-6 w-6 ${getBankIconColor(bank.type)}`} />
-          </div>
+          <a
+            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 rounded-xl bg-pink-primary/10 hover:bg-pink-primary/20 transition-colors"
+            title="View on Google Maps"
+          >
+            <MapPin className="h-6 w-6 text-pink-primary" />
+          </a>
         </div>
 
         <div className="space-y-2 mb-4">
@@ -277,6 +283,21 @@ export const Banks = () => {
         <span className={`px-3 py-1 rounded-full text-xs font-medium ${getBankTypeClasses(bank.type)}`}>
           {bank.type === 'public' ? 'Public' : 'Private'}
         </span>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center space-x-2 text-text-body">
+          <MapPin className="h-4 w-4" />
+          <span>{bank.city}, {bank.state}</span>
+          <a
+            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-pink-primary hover:text-pink-hover underline text-xs"
+            title="View on Google Maps"
+          >
+            Maps
+          </a>
+        </div>
       </td>
       <td className="px-6 py-4 text-sm text-navy/70">{bank.phone}</td>
       <td className="px-6 py-4 text-sm text-navy/70">{bank.email}</td>
@@ -427,6 +448,15 @@ export const Banks = () => {
                         <div className="flex items-center space-x-2 text-text-body">
                           <MapPin className="h-4 w-4" />
                           <span>{bank.city}, {bank.state}</span>
+                          <a
+                            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-2 text-pink-primary hover:text-pink-hover underline text-xs"
+                            title="View on Google Maps"
+                          >
+                            Maps
+                          </a>
                         </div>
                       </td>
                       <td className="px-6 py-4">

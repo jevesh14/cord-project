@@ -43,8 +43,8 @@ export const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <Heart className="h-8 w-8 text-pink-primary" fill="currentColor" />
               <div>
-                <h3 className="text-xl font-bold">Sanjeevni Stem</h3>
-                <p className="text-sm text-text-light/70">Every Drop Has a Future</p>
+                <h3 className="text-xl font-bold">Aanchal</h3>
+                <p className="text-sm text-text-light/70">The Future Of Healing</p>
               </div>
             </div>
             <p className="text-text-light/80 mb-6 max-w-md">
@@ -54,18 +54,18 @@ export const Footer = () => {
             </p>
             <div className="space-y-2">
               <a 
-                href="mailto:info@sanjeevnystem.org" 
+                href="mailto:advikasahney123@gmail.com" 
                 className="flex items-center space-x-2 text-text-light/80 hover:text-pink-soft transition-colors duration-200"
               >
                 <Mail className="h-4 w-4" />
-                <span>info@sanjeevnystem.org</span>
+                <span>advikasahney123@gmail.com</span>
               </a>
               <a 
-                href="tel:+911234567890" 
+                href="tel:9116083443" 
                 className="flex items-center space-x-2 text-text-light/80 hover:text-pink-soft transition-colors duration-200"
               >
                 <Phone className="h-4 w-4" />
-                <span>+91 12345 67890</span>
+                <span>9116083443</span>
               </a>
               <div className="flex items-center space-x-2 text-text-light/80">
                 <MapPin className="h-4 w-4" />
@@ -99,11 +99,9 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
               <p className="text-text-light/60 text-sm">
-                © {currentYear} Sanjeevni Stem. All rights reserved.
+                © {currentYear} Aanchal. All rights reserved.
               </p>
-              <p className="text-text-light/60 text-sm">
-                A public awareness initiative for cord blood preservation
-              </p>
+              <p className="text-text-light/60 text-sm">made by jevesh jain</p>
             </div>
             
             {/* Social Links */}

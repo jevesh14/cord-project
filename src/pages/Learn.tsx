@@ -512,14 +512,16 @@ export const Learn = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+911234567890"
+                href="tel:9116083443"
                 className="px-8 py-4 bg-pink-primary text-text-light font-semibold rounded-2xl hover:bg-pink-hover hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <Phone className="h-5 w-5" />
-                <span>Call Us</span>
+                <span>Call Us: 9116083443</span>
               </a>
               <a
-                href="mailto:info@sanjeevnystem.org"
+                href="mailto:advikasahney123@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-background-card text-plum font-semibold rounded-2xl border border-pink-soft/20 hover:bg-pink-soft/10 hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
               >
                 <Mail className="h-5 w-5" />

@@ -44,9 +44,9 @@ export const Navigation = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-text-light group-hover:text-pink-primary transition-colors duration-200">
-                Sanjeevni Stem
+                Aanchal
               </h1>
-              <p className="text-xs text-text-light/70 hidden sm:block">Every Drop Has a Future</p>
+              <p className="text-xs text-text-light/70 hidden sm:block">The Future Of Healing</p>
             </div>
           </Link>
 

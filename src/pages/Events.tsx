@@ -39,7 +39,7 @@ export const Events = () => {
       capacity: 100,
       registered: 67,
       image: 'https://images.pexels.com/photos/7088526/pexels-photo-7088526.jpeg?auto=compress&cs=tinysrgb&w=400',
-      organizer: 'Sanjeevni Stem Foundation',
+      organizer: 'Aanchal Foundation',
       tags: ['Education', 'Parents', 'Decision Making']
     },
     {

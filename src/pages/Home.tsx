@@ -147,7 +147,7 @@ export const Home = () => {
               Learn More
             </Link>
             <Link
-              to="/locator"
+              to="/banks"
               className="px-8 py-4 bg-text-light/10 text-text-light font-semibold rounded-2xl border border-text-light/20 hover:bg-text-light/20 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
             >
               Find Cord Bank

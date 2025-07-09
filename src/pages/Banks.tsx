@@ -28,6 +28,162 @@ export const Banks = () => {
   const cordBanks: CordBank[] = [
     {
       id: '1',
+      name: 'Biocell',
+      type: 'private',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      phone: '1800-209-0309',
+      email: 'info@biocell.in',
+      website: 'https://biocell.in',
+      services: ['Umbilical cord blood & tissue banking', 'advanced regenerative cell therapies like OSSGROW(R)', 'CARTIGROW(R)', 'UREGROW(R)'],
+      accreditation: ['ISO', 'DCGI'],
+      established: 2009
+    },
+    {
+      id: '2',
+      name: 'Cloudnine (Cryonine Stem Cell Banking)',
+      type: 'private',
+      city: 'Bengaluru',
+      state: 'Karnataka',
+      phone: '+91 76191 97295',
+      email: 'cloudninecare.com',
+      website: 'https://cloudninecare.com/service-types/cryonine-stem-cell-banking',
+      services: ['Umbilical cord blood collection', 'processing', 'secure storage (powered by Cryoviva)'],
+      accreditation: ['Cryoviva partnership'],
+      established: 2018
+    },
+    {
+      id: '3',
+      name: 'Cocoon Hospital (Stem Cell Preservation Division)',
+      type: 'private',
+      city: 'Jaipur',
+      state: 'Rajasthan',
+      phone: '08929-816349',
+      email: 'contactjpr@cocoon.co.in',
+      website: 'https://cocoon.co.in',
+      services: ['Umbilical Cord Blood Banking', 'Cord Tissue Storage', 'Stem Cell Preservation'],
+      accreditation: ['In partnership with Cryoviva (AABB, ISO 9001)'],
+      established: 2013
+    },
+    {
+      id: '4',
+      name: 'Cryo StemCell',
+      type: 'private',
+      city: 'Bengaluru',
+      state: 'Karnataka',
+      phone: '+91 94480 74485',
+      email: 'info@cryostemcell.in',
+      website: 'https://cryostemcell.in',
+      services: ['Umbilical cord blood & cord tissue banking for family use'],
+      accreditation: ['ISO', 'DCGI'],
+      established: 2003
+    },
+    {
+      id: '5',
+      name: 'Cryovault Biotech Pvt. Ltd.',
+      type: 'private',
+      city: 'Bengaluru',
+      state: 'Karnataka',
+      phone: '1800 102 4026 / +91 73311 61886',
+      email: 'info@cryovault.in',
+      website: 'https://cryovault.in',
+      services: ['Umbilical cord blood & tissue banking', 'support kits', '24/7 customer care'],
+      accreditation: ['IFDA', 'DCGI', 'ANSI', 'ISO 9001'],
+      established: 2015
+    },
+    {
+      id: '6',
+      name: 'Novacord',
+      type: 'private',
+      city: 'Gurugram',
+      state: 'Haryana',
+      phone: '(via website)',
+      email: 'enquiry@totipotentrx.com',
+      website: 'https://novacord.com',
+      services: ['Umbilical cord blood & tissue banking integrated with advanced cellular therapy'],
+      accreditation: ['DCGI'],
+      established: 2011
+    },
+    {
+      id: '7',
+      name: 'Ree Laboratories Pvt. Ltd.',
+      type: 'private',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      phone: '1800-222-454',
+      email: '(via website)',
+      website: 'https://reelabs.com',
+      services: ['Stem cell banking from multiple sources - cord blood, tissue, placenta, amniotic sac, amniotic fluid, bone marrow, adipose tissue, menstrual blood'],
+      accreditation: ['ISO', 'DCGI', 'cGMP'],
+      established: 2010
+    },
+    {
+      id: '8',
+      name: 'StemPlus Cryopreservation Pvt Ltd.',
+      type: 'private',
+      city: 'Sangli',
+      state: 'Maharashtra',
+      phone: '+91 95952 72702',
+      email: 'info@stemplusbiotech.com',
+      website: 'https://stemplusbiotech.com',
+      services: ['Cord blood', 'cord tissue', 'placenta', 'menstrual', 'urine-derived', 'dental stem cell banking', 'DCGI/FDA-approved cGMP lab'],
+      accreditation: ['DCGI', 'cGLP', 'ISO 9001 2015', 'AABB'],
+      established: 2012
+    },
+    {
+      id: '9',
+      name: 'Cordlife Sciences India Pvt. Ltd.',
+      type: 'private',
+      city: 'Kolkata',
+      state: 'West Bengal',
+      phone: '98301 66200',
+      email: 'info@cordlifeindia.com',
+      website: 'https://cordlifeindia.com',
+      services: ['Cord blood & cord tissue storage', 'newborn screening options'],
+      accreditation: ['AABB', 'NABL', 'CAP', 'DCGI', 'ISO', 'WHO-GMP'],
+      established: 2001
+    },
+    {
+      id: '10',
+      name: 'Narayana Hrudayalaya Tissue Bank & Stem Cells Research Centre',
+      type: 'public',
+      city: 'Bengaluru',
+      state: 'Karnataka',
+      phone: '(via hospital)',
+      email: '(via hospital)',
+      website: 'https://narayanahospitals.com/cellsofhope',
+      services: ["Cord blood and Wharton's jelly (cord tissue) banking", 'combined public/private repository'],
+      accreditation: ['DCGI-licensed'],
+      established: 2010
+    },
+    {
+      id: '11',
+      name: 'Best Wellcare Management Services Pvt. Ltd. (Indu Stem Cell Bank)',
+      type: 'private',
+      city: 'Vadodara',
+      state: 'Gujarat',
+      phone: '(via website)',
+      email: '(via website)',
+      website: '(via website)',
+      services: ['Umbilical cord blood & tissue stem cell banking', 'collection kits', 'safe transport logistics', 'processing', 'cryopreservation at -196 C', 'long-term secure storage'],
+      accreditation: ['Licensed by DCGI'],
+      established: 2018
+    },
+    {
+      id: '12',
+      name: 'Path Care Labs Pvt. Ltd. (Cord Care division)',
+      type: 'private',
+      city: 'Hyderabad',
+      state: 'Telangana',
+      phone: '78389-99111',
+      email: '(via website)',
+      website: 'https://pathcarelabs.com',
+      services: ['Umbilical cord blood stem cell banking as part of diagnostic & life sciences offerings', 'access to 600+ regional collection centers and automated labs'],
+      accreditation: ['NABL-certified diagnostic labs', 'licensed by DCGI'],
+      established: 2008
+    },
+    {
+      id: '13',
       name: 'LifeCell International',
       type: 'private',
       city: 'Chennai',
@@ -40,10 +196,10 @@ export const Banks = () => {
       established: 2004
     },
     {
-      id: '2',
+      id: '14',
       name: 'Cryoviva Biotech',
       type: 'private',
-      city: 'Gurgaon',
+      city: 'Gurugram',
       state: 'Haryana',
       phone: '+91-124-456-7890',
       email: 'contact@cryoviva.com',
@@ -53,7 +209,7 @@ export const Banks = () => {
       established: 2006
     },
     {
-      id: '3',
+      id: '15',
       name: 'Stemcyte India',
       type: 'public',
       city: 'Mumbai',
@@ -66,7 +222,7 @@ export const Banks = () => {
       established: 2008
     },
     {
-      id: '4',
+      id: '16',
       name: 'Reliance Cord Blood Bank',
       type: 'private',
       city: 'Mumbai',
@@ -79,7 +235,7 @@ export const Banks = () => {
       established: 2010
     },
     {
-      id: '5',
+      id: '17',
       name: 'All India Institute of Medical Sciences (AIIMS)',
       type: 'public',
       city: 'Delhi',
@@ -92,7 +248,7 @@ export const Banks = () => {
       established: 2005
     },
     {
-      id: '6',
+      id: '18',
       name: 'Babycell',
       type: 'private',
       city: 'Hyderabad',
@@ -106,7 +262,10 @@ export const Banks = () => {
     }
   ];
 
-  const cities = Array.from(new Set(cordBanks.map(bank => bank.city))).sort();
+  const filteredCities = useMemo(() => {
+    const citySet = new Set(cordBanks.map(bank => bank.city));
+    return Array.from(citySet).sort();
+  }, []);
 
   // Haversine formula for distance
   const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number) => {
@@ -199,7 +358,7 @@ export const Banks = () => {
             </div>
           </div>
           <a
-            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${bank.name}, ${bank.city}, ${bank.state}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-xl bg-pink-primary/10 hover:bg-pink-primary/20 transition-colors"
@@ -289,7 +448,7 @@ export const Banks = () => {
           <MapPin className="h-4 w-4" />
           <span>{bank.city}, {bank.state}</span>
           <a
-            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${bank.name}, ${bank.city}, ${bank.state}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="ml-2 text-pink-primary hover:text-pink-hover underline text-xs"
@@ -330,7 +489,7 @@ export const Banks = () => {
               Find Cord Blood Banks
             </h1>
             <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
-              Discover accredited cord blood banks across India and find the right one for your family.
+              Whether you're considering private storage or public donation, find the right cord bank near you.
             </p>
           </motion.div>
         </div>
@@ -374,7 +533,7 @@ export const Banks = () => {
                   className="w-full px-4 py-3 rounded-xl bg-background-card border border-pink-soft/20 text-plum focus:outline-none focus:ring-2 focus:ring-pink-primary/20"
                 >
                   <option value="all">All Cities</option>
-                  {cities.map(city => (
+                  {filteredCities.map(city => (
                     <option key={city} value={city}>{city}</option>
                   ))}
                 </select>
@@ -449,7 +608,7 @@ export const Banks = () => {
                           <MapPin className="h-4 w-4" />
                           <span>{bank.city}, {bank.state}</span>
                           <a
-                            href={`https://maps.google.com/?q=${cityCoords[bank.city]?.lat ?? ''},${cityCoords[bank.city]?.lng ?? ''}${!cityCoords[bank.city] ? `${bank.city},${bank.state}` : ''}`}
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${bank.name}, ${bank.city}, ${bank.state}`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="ml-2 text-pink-primary hover:text-pink-hover underline text-xs"

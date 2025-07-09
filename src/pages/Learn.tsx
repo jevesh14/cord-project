@@ -1,6 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, Play, Download, ExternalLink, BookOpen, Video, FileText, HelpCircle, Phone, Mail } from 'lucide-react';
+
+// Typewriter effect with typing and deleting
+function useTypewriterDelete(words: string[], speed = 80, pause = 1200, delSpeed = 40) {
+  const [index, setIndex] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing');
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    if (phase === 'typing') {
+      if (displayed.length < words[index].length) {
+        timeout = setTimeout(() => setDisplayed(words[index].slice(0, displayed.length + 1)), speed);
+      } else {
+        timeout = setTimeout(() => setPhase('pausing'), pause);
+      }
+    } else if (phase === 'pausing') {
+      timeout = setTimeout(() => setPhase('deleting'), 400);
+    } else if (phase === 'deleting') {
+      if (displayed.length > 0) {
+        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), delSpeed);
+      } else {
+        setIndex((index + 1) % words.length);
+        setPhase('typing');
+      }
+    }
+    return () => clearTimeout(timeout);
+  }, [displayed, phase, index, words, speed, pause, delSpeed]);
+  return displayed;
+}
 
 export const Learn = () => {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
@@ -43,30 +71,15 @@ export const Learn = () => {
   ];
 
   const mythsVsFacts = [
-    {
-      myth: "Cord blood collection is painful and risky for the baby",
-      fact: "Cord blood collection is completely painless and risk-free. It occurs after the baby is born and the cord is already clamped and cut. The procedure takes only 3-5 minutes and doesn't interfere with immediate skin-to-skin contact or breastfeeding."
-    },
-    {
-      myth: "Cord blood banking is only for wealthy families",
-      fact: "Public cord blood banking is completely free and available to all families. Private banking costs ₹50,000-₹1,50,000 initially, but many banks offer payment plans, discounts, and financial assistance. Some insurance policies also cover cord blood banking."
-    },
-    {
-      myth: "Cord blood can only help the baby it came from",
-      fact: "Cord blood can potentially help siblings (25% perfect match chance), parents, and other family members. It's more forgiving of HLA mismatches than bone marrow transplants, making it more likely to be usable by relatives."
-    },
-    {
-      myth: "Cord blood loses its effectiveness over time",
-      fact: "Properly stored cord blood remains viable indefinitely. Studies show cord blood stored for over 25 years maintains its therapeutic potential. The key is proper processing and cryopreservation at -196°C."
-    },
-    {
-      myth: "Cord blood transplants are experimental and unproven",
-      fact: "Cord blood transplants are FDA-approved and have been used successfully for over 30 years. They've treated over 80 diseases including leukemia, lymphoma, sickle cell anemia, and immune disorders. Over 40,000 transplants have been performed worldwide."
-    },
-    {
-      myth: "Public banking means you lose access to your baby's cord blood",
-      fact: "While public banking donates cord blood to help others, many public banks offer 'directed donation' where you can reserve the cord blood for your family if there's a medical need. Public banking helps others while potentially benefiting your family."
-    }
+    { myth: '"Cord blood is the same as regular blood"', fact: 'It\'s not. UCB is rich in stem cells, which have the unique ability to form new blood and immune cells — making it useful for treating serious diseases.' },
+    { myth: '"It\'s risky or painful for the baby."', fact: 'It\'s collected after birth and cord cutting. Safe and painless.' },
+    { myth: '"Only my baby can use it."', fact: 'It can help siblings or even unrelated patients.' },
+    { myth: '"Public donation isn\'t available in India."', fact: 'It is — through selected hospitals and public banks. Awareness is just low.' },
+    { myth: '"It\'s not worth it if I\'m not storing it for my child."', fact: 'Even if your child may never need it, your donation could save someone else\'s life. Public donation is a selfless act of medical generosity.' },
+    { myth: '"It\'s just a trend — will it even be useful years from now?"', fact: 'Cord blood use is expanding. Stem cell therapies are being researched for autism, cerebral palsy, and more. Banking or donating is an investment in future medicine.' },
+    { myth: '"It\'s too complicated — I don\'t want extra stress during delivery."', fact: 'The collection process is handled by trained staff and doesn\'t interrupt your birth experience. Just a simple consent form and coordination with your doctor are enough.' },
+    { myth: "It's painful for the baby.", fact: "It's done after the cord is cut. Painless." },
+    { myth: "It's complicated and risky.", fact: "It's simple, safe, and guided by doctors." },
   ];
 
   const videos = [
@@ -152,6 +165,11 @@ export const Learn = () => {
     setFlippedCards(newFlipped);
   };
 
+  const typewriterText = useTypewriterDelete([
+    "Every Drop, Someone's Tomorrow",
+    "Born Today. Saving Tomorrow."
+  ], 60, 1600, 40);
+
   return (
     <div className="min-h-screen bg-background-main pt-20">
       {/* Hero Section */}
@@ -164,8 +182,13 @@ export const Learn = () => {
             className="text-center"
           >
             <BookOpen className="h-16 w-16 mx-auto mb-6 text-pink-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Learn About Cord Blood Banking
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 min-h-[3.5rem]">
+              <span
+                className="inline-block border-r-2 border-pink-primary pr-1 animate-pulse"
+                style={{ minWidth: '1ch' }}
+              >
+                {typewriterText}
+              </span>
             </h1>
             <p className="text-xl text-text-light/90 max-w-3xl mx-auto">
               Get comprehensive information about umbilical cord blood, its benefits, 
@@ -255,70 +278,49 @@ export const Learn = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-8">
-            {mythsVsFacts.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="flex flex-col md:flex-row gap-4 items-stretch">
-                  <motion.div
-                    initial={{ x: -50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                    viewport={{ once: true }}
-                    className="flex-1"
+          {/* Main myths vs facts flip cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {mythsVsFacts.map((item, index) => {
+              const isFlipped = flippedCards.has(index);
+              // Remove double quotes from myth and fact
+              const myth = item.myth.replace(/^"|"$/g, '');
+              const fact = item.fact.replace(/^"|"$/g, '');
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative flex justify-center items-stretch cursor-pointer"
+                  style={{ perspective: 1200 }}
+                  onClick={() => toggleFlipCard(index)}
+                >
+                  <div
+                    className={`w-full max-w-xs min-h-[220px] [transform-style:preserve-3d] transition-transform duration-700 rounded-2xl shadow-lg border-2 ${isFlipped ? 'rotate-y-180' : ''} ${isFlipped ? 'bg-pink-primary border-pink-primary' : 'bg-background-card border-pink-primary/20'}`}
                   >
-                    <div className="h-full p-6 bg-background-card rounded-2xl shadow-lg border-2 border-pink-primary/20">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-pink-primary/10 flex items-center justify-center">
-                          <span className="text-pink-primary font-semibold">M</span>
-                        </div>
+                    {/* Front (Myth) */}
+                    <div className={`absolute inset-0 w-full h-full px-6 py-6 rounded-2xl flex flex-col justify-center items-start backface-hidden ${isFlipped ? 'invisible' : 'visible'}`} style={{ backfaceVisibility: 'hidden' }}>
+                      <div className="mb-4">
                         <h3 className="text-lg font-semibold text-pink-primary">Myth</h3>
                       </div>
-                      <p className="text-text-body">{item.myth}</p>
+                      <p className="text-text-body">{myth}</p>
                     </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: (index * 0.2) + 0.3 }}
-                    viewport={{ once: true }}
-                    className="w-12 hidden md:flex items-center justify-center"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-pink-primary flex items-center justify-center transform rotate-45">
-                      <span className="text-text-light text-2xl transform -rotate-45">→</span>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: 50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: (index * 0.2) + 0.4 }}
-                    viewport={{ once: true }}
-                    className="flex-1"
-                  >
-                    <div className="h-full p-6 bg-pink-primary rounded-2xl shadow-lg">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-text-light/10 flex items-center justify-center">
-                          <span className="text-text-light font-semibold">F</span>
-                        </div>
+                    {/* Back (Fact) */}
+                    <div className={`absolute inset-0 w-full h-full px-6 py-6 rounded-2xl flex flex-col justify-center items-start backface-hidden ${isFlipped ? 'visible' : 'invisible'}`} style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}>
+                      <div className="mb-4">
                         <h3 className="text-lg font-semibold text-text-light">Fact</h3>
                       </div>
-                      <p className="text-text-light/90">{item.fact}</p>
+                      <p className="text-text-light/90">{fact}</p>
                     </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
+
 
       {/* Educational Videos Section */}
       <section className="py-16 bg-background-main">
@@ -528,6 +530,40 @@ export const Learn = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* How You Can Help Section (standalone) */}
+      <section id="how-you-can-help" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-plum mb-4">
+              How You Can Help
+            </h2>
+            <p className="text-xl text-text-body max-w-3xl mx-auto mb-8">
+              You can make a difference by spreading awareness and supporting cord blood donation.
+            </p>
+          </motion.div>
+          <div className="max-w-3xl mx-auto">
+            <ul className="list-disc ml-8 space-y-2 text-base mb-6 text-left">
+              <li>Ask your doctor if cord blood donation is available at your hospital.</li>
+              <li>Choose public donation—it's free, ethical, and life-saving.</li>
+              <li>Join the movement. Visit our site, watch the stories, and share the message. Spread awareness. One family's birth can save another's.</li>
+            </ul>
+            <div className="mb-2 text-lg font-semibold">Safe</div>
+            <div className="mb-2 text-lg font-semibold">Painless</div>
+            <div className="mb-2 text-lg font-semibold">Takes only minutes after birth</div>
+            <div className="text-lg">It can become a <span className="font-bold">second chance at life</span> for someone in need.</div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
+
+/* Add the following CSS to your global stylesheet (e.g., src/index.css):
+.rotate-y-180 { transform: rotateY(180deg); }
+.backface-hidden { backface-visibility: hidden; } */

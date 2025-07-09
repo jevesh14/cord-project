@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronDown, Heart, Shield, Users, BookOpen, Search, Calendar } from 'lucide-react';
 
+// Typewriter effect with typing and deleting
+
+
 export const Home = () => {
   const [scrollY, setScrollY] = useState(0);
 
@@ -15,20 +18,20 @@ export const Home = () => {
   const features = [
     {
       icon: Heart,
-      title: 'Life-Saving Potential',
-      description: 'Umbilical cord blood contains powerful stem cells that can treat over 80 diseases',
+      title: '1. Life-Saving Potential',
+      description: `Cord blood contains powerful stem cells used to treat over 80 life-threatening conditions.\nEffective in treating blood cancers, genetic diseases, and immune disorders\nUsed in 40,000+ transplants worldwide\nRecognized by doctors and researchers as a vital medical resource`,
       color: 'primary'
     },
     {
       icon: Shield,
-      title: 'Future Protection',
-      description: 'Secure your family\'s health with preserved cord blood for potential future treatments',
+      title: '2. Future-Proofing Your Family',
+      description: `Banked cord blood is a biological safety net — ready if and when you need it.:\nCan be stored for 20+ years and still remain viable\nAs science evolves, its applications continue to expand\nMay support future regenerative therapies (e.g., for autism, cerebral palsy, diabetes)`,
       color: 'soft'
     },
     {
       icon: Users,
-      title: 'Family Benefits',
-      description: 'Cord blood can potentially help siblings and family members in need of treatment',
+      title: '3. Family-Wide Benefits',
+      description: `One collection can help multiple family members in need.:\nSiblings have up to a 75% chance of being a match\nUseful for parents and extended family in some cases\nEspecially crucial in India where finding matched donors is harder due to genetic diversity`,
       color: 'vivid'
     }
   ];
@@ -82,8 +85,11 @@ export const Home = () => {
     return colorMap[color as keyof typeof colorMap] || 'text-pink-primary';
   };
 
+
   return (
     <div className="overflow-hidden">
+      {/* Typewriter Header Animation */}
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-plum via-plum/90 to-plum/80">
         {/* Animated Background Elements */}
@@ -123,14 +129,10 @@ export const Home = () => {
           >
             <Heart className="h-16 w-16 mx-auto mb-6 text-pink-primary animate-pulse" fill="currentColor" />
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-light mb-6 leading-tight">
-              Every Drop Has a{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-primary to-pink-soft">
-                Future
-              </span>
+              AANCHAL: THE FUTURE OF HEALING
             </h1>
             <p className="text-xl md:text-2xl text-text-light/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Discover the life-saving potential of umbilical cord blood. 
-              Preserve today's miracle for tomorrow's hope.
+              Preserving cord blood isn't just a choice- it's a chance. For your child. For someone else's. For the future. Learn how you can make a difference.
             </p>
           </motion.div>
 

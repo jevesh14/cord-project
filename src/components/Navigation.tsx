@@ -6,7 +6,6 @@ import { Menu, X, Heart, ChevronDown } from 'lucide-react';
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [languageOpen, setLanguageOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -23,13 +22,6 @@ export const Navigation = () => {
     { name: 'Cord Banks', path: '/banks' },
     { name: 'Stories', path: '/stories' },
     { name: 'Events', path: '/events' },
-  ];
-
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
-    { code: 'te', name: 'తెలుగు' },
-    { code: 'ta', name: 'தமிழ்' },
   ];
 
   return (
@@ -71,40 +63,6 @@ export const Navigation = () => {
                 )}
               </Link>
             ))}
-            
-            {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setLanguageOpen(!languageOpen)}
-                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-text-light hover:text-pink-soft transition-colors duration-200"
-              >
-                <span>EN</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <AnimatePresence>
-                {languageOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-32 bg-background-card rounded-xl shadow-lg border border-pink-soft/20 overflow-hidden"
-                  >
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        className="w-full px-4 py-2 text-left text-sm text-plum hover:bg-pink-soft/10 transition-colors duration-200"
-                        onClick={() => {
-                          // TODO: Connect to language switching functionality
-                          setLanguageOpen(false);
-                        }}
-                      >
-                        {lang.name}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -143,21 +101,7 @@ export const Navigation = () => {
                 </Link>
               ))}
               <div className="pt-2 border-t border-pink-soft/20">
-                <p className="px-4 py-2 text-xs font-medium text-plum/70 uppercase tracking-wide">
-                  Language
-                </p>
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    className="block w-full px-4 py-2 text-left text-sm text-plum hover:bg-pink-soft/10 transition-colors duration-200"
-                    onClick={() => {
-                      // TODO: Connect to language switching functionality
-                      setIsOpen(false);
-                    }}
-                  >
-                    {lang.name}
-                  </button>
-                ))}
+                {/* Language selector removed */}
               </div>
             </div>
           </motion.div>

@@ -9,7 +9,6 @@ export const Footer = () => {
     'Quick Links': [
       { name: 'Learn About Cord Blood', path: '/learn' },
       { name: 'Find Cord Banks', path: '/banks' },
-      { name: 'Bank Locator', path: '/locator' },
       { name: 'Success Stories', path: '/stories' },
     ],
     'Resources': [
@@ -17,12 +16,6 @@ export const Footer = () => {
       { name: 'Events & Workshops', path: '/events' },
       { name: 'FAQ', path: '/learn#faq' },
       { name: 'Myths vs Facts', path: '/learn#myths' },
-    ],
-    'Support': [
-      { name: 'Contact Us', path: '/contact' },
-      { name: 'Privacy Policy', path: '/privacy' },
-      { name: 'Terms of Service', path: '/terms' },
-      { name: 'Accessibility', path: '/accessibility' },
     ],
   };
 
@@ -54,7 +47,9 @@ export const Footer = () => {
             </p>
             <div className="space-y-2">
               <a 
-                href="mailto:advikasahney123@gmail.com" 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=advikasahney123@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-text-light/80 hover:text-pink-soft transition-colors duration-200"
               >
                 <Mail className="h-4 w-4" />
@@ -84,6 +79,7 @@ export const Footer = () => {
                     <Link
                       to={link.path}
                       className="text-text-light/80 hover:text-pink-soft transition-colors duration-200 text-sm"
+                      style={{ cursor: 'pointer' }}
                     >
                       {link.name}
                     </Link>
